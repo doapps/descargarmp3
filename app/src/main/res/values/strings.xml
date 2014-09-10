@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">descargarmp3</string>
+    <string name="app_name">descargar mp3</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Splash String's -->
+    <string name="search">Buscar</string>
+    <string name="hint_search">música</string>
+
+    <!-- Item Music -->
+    <string name="name_music">Nombre de la musica</string>
+    <string name="duration_music">10:00</string>
+
+    <!-- Search String's -->
+    <string name="load_more">Ver más resultados</string>
+    
+    <!-- Player String's -->
+    <string name="play">Play</string>
+    <string name="download">Descargar</string>
+
+    <!-- Download String's -->
+    <string name="back">Atrás</string>
+    <string name="home">Inicio</string>
+    <string name="new_folder">Nueva Carpeta</string>
 
 </resources>
