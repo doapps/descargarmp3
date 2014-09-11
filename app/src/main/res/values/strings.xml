@@ -6,8 +6,8 @@
     <string name="action_settings">Settings</string>
 
     <!-- Splash String's -->
-    <string name="search">Buscar</string>
-    <string name="hint_search">música</string>
+    <string name="search">Go</string>
+    <string name="hint_search">Buscar...</string>
 
     <!-- Item Music -->
     <string name="name_music">Nombre de la musica</string>

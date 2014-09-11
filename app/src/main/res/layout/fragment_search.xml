@@ -8,14 +8,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="5dp"
         android:orientation="horizontal">
 
         <EditText
             android:layout_weight="4"
+            android:gravity="center"
             android:id="@+id/txt_search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/holo_flat_edittext_plomo_claro"
+            android:layout_height="48dp"
+            android:layout_marginRight="5dp"
             android:hint="@string/hint_search"/>
 
         <Button
@@ -23,6 +26,8 @@
             android:id="@+id/btn_search"
             android:layout_width="0dp"
             android:text="@string/search"
+            android:textColor="@color/color_blanco"
+            android:background="@drawable/holo_flat_button_plomo_oscuro"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
@@ -30,7 +35,7 @@
     <ListView
         android:id="@+id/list_music"
         android:layout_width="match_parent"
-        android:layout_height="250dp"></ListView>
+        android:layout_height="wrap_content"></ListView>
 
     <Button
         android:layout_width="match_parent"

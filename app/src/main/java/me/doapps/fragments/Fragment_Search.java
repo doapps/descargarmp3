@@ -22,7 +22,7 @@ import me.doapps.tasks.Task_Music;
 /**
  * Created by jnolascob on 10/09/2014.
  */
-public class Fragment_Searchh extends Fragment {
+public class Fragment_Search extends Fragment {
     private ProgressDialog progressDialog;
 
     @Override

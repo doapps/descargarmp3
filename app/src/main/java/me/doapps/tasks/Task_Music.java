@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,16 +45,15 @@ public class Task_Music {
                     public void onResponse(String response) {
                         try {
                             ArrayList<Music_DTO> music_dtos = new ArrayList<Music_DTO>();
-
                             JSONArray jsonArrayMusic = new JSONArray(response);
                             Log.e("list music", jsonArrayMusic.toString());
                             if(jsonArrayMusic.length()>0){
-                                for (int i = 0; i < jsonArrayMusic.length(); i++) {
-                                    String temp_title = jsonArrayMusic.getJSONObject(i).getString("title").toString();
-                                    String temp_url = jsonArrayMusic.getJSONObject(i).getString("mp3_url").toString();
-                                    Log.e("title", jsonArrayMusic.getJSONObject(i).getString("title"));
-                                    Log.e("mp3_url", jsonArrayMusic.getJSONObject(i).getString("mp3_url"));
-                                    music_dtos.add(new Music_DTO(temp_title, temp_url));
+                                for (int i = 0; i < jsonArrayMusic.length() - 1; i++) {
+                                    JSONObject jsonObject = jsonArrayMusic.getJSONObject(i);
+                                    Music_DTO music_dto = new Music_DTO();
+                                    music_dto.setName(jsonObject.getString("title").toString());
+                                    music_dto.setUrl(jsonObject.getString("mp3_url"));
+                                    music_dtos.add(music_dto);
                                 }
                                 interface_music.getMusic(true, music_dtos);
                             }

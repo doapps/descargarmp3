@@ -10,31 +10,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import me.doapps.adapters.Fragment_Adapter;
 
 
-public class Main extends FragmentActivity {
+public class Main extends ActionBarActivity {
 
     Fragment_Adapter mAdapter;
     ViewPager mPager;
-    TitlePageIndicator mIndicator;
+    TabPageIndicator mIndicator;
     int Number = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getActionBar().hide();
+        getSupportActionBar().hide();
 
         mAdapter = new Fragment_Adapter(getSupportFragmentManager());
 
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-        mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
+        mIndicator = (TabPageIndicator)findViewById(R.id.indicator);
         mIndicator.setViewPager(mPager);
 
     }

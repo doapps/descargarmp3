@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.viewpagerindicator.IconPagerAdapter;
 
 import me.doapps.fragments.Fragment_Download;
+import me.doapps.fragments.Fragment_Search;
 
 /**
  * Created by jnolascob on 10/09/2014.
@@ -20,8 +21,7 @@ public class Fragment_Adapter extends FragmentPagerAdapter implements IconPagerA
 
     @Override
     public Fragment getItem(int i) {
-        Fragment fragment = new Fragment_Search();
-
+        Fragment fragment;
         switch (i){
             case 0:
                 fragment = new Fragment_Search();
@@ -43,7 +43,7 @@ public class Fragment_Adapter extends FragmentPagerAdapter implements IconPagerA
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -59,8 +59,6 @@ public class Fragment_Adapter extends FragmentPagerAdapter implements IconPagerA
             case 2:
                 title = "Reproducir";
                 break;
-            default:
-                title = "Buscar";
         }
         return title;
     }
