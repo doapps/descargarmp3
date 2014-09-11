@@ -5,19 +5,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import me.doapps.adapters.Music_Adapter;
 import me.doapps.beans.Music_DTO;
+import me.doapps.descargarmp3.Main;
 import me.doapps.descargarmp3.R;
 import me.doapps.tasks.Task_Music;
 
@@ -47,7 +52,19 @@ public class Fragment_Search extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         listatracks = (ListView) getView().findViewById(R.id.list_music);
+        listatracks.setOnItemClickListener(onItemClickListener);
+
         editText = (EditText) getView().findViewById(R.id.txt_search);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    buscarTracks();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         /**
          * EMPTY - SHOW
@@ -59,31 +76,7 @@ public class Fragment_Search extends Fragment {
         getView().findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!(editText.getText().toString().matches(""))) {
-                    getView().findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            progressDialog = ProgressDialog.show(getActivity(), null, "Buscando...!", true);
-                            Task_Music task_music = new Task_Music(getActivity());
-                            task_music.sendRequestMusics(editText.getText().toString());
-                            task_music.setInterface_music(new Task_Music.Interface_Music() {
-                                @Override
-                                public void getMusic(boolean status, ArrayList<Music_DTO> music_dtos) {
-                                    listatracks.setVisibility(View.VISIBLE);
-                                    getView().findViewById(R.id.frameempty).setVisibility(View.GONE);
-                                    progressDialog.hide();
-                                    if (status) {
-                                        hideSoftKeyboard();
-                                        music_adapter = new Music_Adapter(music_dtos, getActivity());
-                                        listatracks.setAdapter(music_adapter);
-                                    }
-                                }
-                            });
-                        }
-                    });
-                } else {
-                    Toast.makeText(getActivity(), "Ingrese un criterio de busqueda...!", Toast.LENGTH_SHORT).show();
-                }
+                buscarTracks();
             }
         });
     }
@@ -97,4 +90,39 @@ public class Fragment_Search extends Fragment {
             inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         }
     }
+
+    private void buscarTracks(){
+        if (!(editText.getText().toString().matches(""))) {
+            getView().findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    progressDialog = ProgressDialog.show(getActivity(), null, "Buscando...!", true);
+                    Task_Music task_music = new Task_Music(getActivity());
+                    task_music.sendRequestMusics(editText.getText().toString());
+                    task_music.setInterface_music(new Task_Music.Interface_Music() {
+                        @Override
+                        public void getMusic(boolean status, ArrayList<Music_DTO> music_dtos) {
+                            listatracks.setVisibility(View.VISIBLE);
+                            getView().findViewById(R.id.frameempty).setVisibility(View.GONE);
+                            progressDialog.hide();
+                            if (status) {
+                                hideSoftKeyboard();
+                                music_adapter = new Music_Adapter(music_dtos, getActivity());
+                                listatracks.setAdapter(music_adapter);
+                            }
+                        }
+                    });
+                }
+            });
+        } else {
+            Toast.makeText(getActivity(), "Ingrese un criterio de busqueda...!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            ((Main)getActivity()).mPager.setCurrentItem(2);
+        }
+    };
 }

@@ -18,9 +18,9 @@ import me.doapps.adapters.Fragment_Adapter;
 
 public class Main extends ActionBarActivity {
 
-    Fragment_Adapter mAdapter;
-    ViewPager mPager;
-    TabPageIndicator mIndicator;
+    private Fragment_Adapter mAdapter;
+    public ViewPager mPager;
+    private TabPageIndicator mIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
