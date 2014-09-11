@@ -123,6 +123,9 @@ public class Fragment_Search extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             ((Main)getActivity()).mPager.setCurrentItem(2);
+            String temp = "";
+            //((Main)getActivity()).getSupportFragmentManager().beginTransaction().add(getActivity(), Fragment_Player.newInstance(temp)).addToBackStack("detalle_producto").commit();
+
         }
     };
 }

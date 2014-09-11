@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.viewpagerindicator.IconPagerAdapter;
 
 import me.doapps.fragments.Fragment_Download;
+import me.doapps.fragments.Fragment_Player;
 import me.doapps.fragments.Fragment_Search;
 
 /**
@@ -30,7 +31,7 @@ public class Fragment_Adapter extends FragmentPagerAdapter implements IconPagerA
                 fragment = new Fragment_Download();
                 break;
             default:
-                fragment = new Fragment_Search();
+                fragment = new Fragment_Player();
         }
         return fragment;
 
