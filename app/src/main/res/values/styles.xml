@@ -7,7 +7,7 @@
 
     <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:maxLines">2</item>
+        <item name="android:maxLines">1</item>
     </style>
 
 </resources>

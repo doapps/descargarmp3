@@ -51,16 +51,20 @@ public class Music_Adapter extends BaseAdapter {
             holder = new Holder();
 
             holder.txt_name_music = (TextView)view.findViewById(R.id.txt_name_music);
+            holder.txt_duration_music = (TextView)view.findViewById(R.id.txt_duration_music);
             view.setTag(holder);
         }
         else {
             holder = (Holder)view.getTag();
         }
         holder.txt_name_music.setText(music_dto.getName());
+        holder.txt_duration_music.setText(music_dto.getDuration());
+
         return view;
     }
 
     class Holder{
         TextView txt_name_music;
+        TextView txt_duration_music;
     }
 }

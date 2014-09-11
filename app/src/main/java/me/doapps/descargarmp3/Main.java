@@ -21,7 +21,6 @@ public class Main extends ActionBarActivity {
     Fragment_Adapter mAdapter;
     ViewPager mPager;
     TabPageIndicator mIndicator;
-    int Number = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

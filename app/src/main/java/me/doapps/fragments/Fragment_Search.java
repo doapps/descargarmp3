@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,12 @@ import me.doapps.tasks.Task_Music;
  * Created by jnolascob on 10/09/2014.
  */
 public class Fragment_Search extends Fragment {
+
+    private ListView listatracks;
+    private EditText editText;
+
     private ProgressDialog progressDialog;
+    protected Music_Adapter music_adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,28 +46,55 @@ public class Fragment_Search extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((Button)getView().findViewById(R.id.btn_search)).setOnClickListener(new View.OnClickListener() {
+        listatracks = (ListView) getView().findViewById(R.id.list_music);
+        editText = (EditText) getView().findViewById(R.id.txt_search);
+
+        /**
+         * EMPTY - SHOW
+         */
+        listatracks.setVisibility(View.GONE);
+        getView().findViewById(R.id.frameempty).setVisibility(View.VISIBLE);
+
+
+        getView().findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog = ProgressDialog.show(getActivity(), null, "Wait please...", true);
-
-                String name = ((EditText)getView().findViewById(R.id.txt_search)).getText().toString();
-                Task_Music task_music = new Task_Music(getActivity());
-                task_music.sendRequestMusics(name);
-                task_music.setInterface_music(new Task_Music.Interface_Music() {
-                    @Override
-                    public void getMusic(boolean status, ArrayList<Music_DTO> music_dtos) {
-                        progressDialog.hide();
-                        if(status){
-                            ((ListView)getView().findViewById(R.id.list_music)).setAdapter(new Music_Adapter(music_dtos, getActivity()));
+                if (!(editText.getText().toString().matches(""))) {
+                    getView().findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            progressDialog = ProgressDialog.show(getActivity(), null, "Buscando...!", true);
+                            Task_Music task_music = new Task_Music(getActivity());
+                            task_music.sendRequestMusics(editText.getText().toString());
+                            task_music.setInterface_music(new Task_Music.Interface_Music() {
+                                @Override
+                                public void getMusic(boolean status, ArrayList<Music_DTO> music_dtos) {
+                                    listatracks.setVisibility(View.VISIBLE);
+                                    getView().findViewById(R.id.frameempty).setVisibility(View.GONE);
+                                    progressDialog.hide();
+                                    if (status) {
+                                        hideSoftKeyboard();
+                                        music_adapter = new Music_Adapter(music_dtos, getActivity());
+                                        listatracks.setAdapter(music_adapter);
+                                    }
+                                }
+                            });
                         }
-                        else{
-                            Log.e("result", "vacio");
-                        }
-                    }
-                });
+                    });
+                } else {
+                    Toast.makeText(getActivity(), "Ingrese un criterio de busqueda...!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
 
+    /**
+     * Hides the soft keyboard
+     */
+    public void hideSoftKeyboard() {
+        if(getActivity().getCurrentFocus()!=null) {
+            InputMethodManager inputMethodManager = (InputMethodManager)getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

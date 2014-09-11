@@ -3,7 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_blanco">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,12 +20,13 @@
             android:background="@drawable/holo_flat_edittext_plomo_claro"
             android:layout_height="48dp"
             android:layout_marginRight="5dp"
-            android:hint="@string/hint_search"/>
+            android:hint="@string/hint_search" />
 
         <Button
             android:layout_weight="2"
             android:id="@+id/btn_search"
             android:layout_width="0dp"
+            android:textStyle="bold"
             android:text="@string/search"
             android:textColor="@color/color_blanco"
             android:background="@drawable/holo_flat_button_plomo_oscuro"
@@ -35,11 +37,38 @@
     <ListView
         android:id="@+id/list_music"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
-
-    <Button
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/load_more"
-        />
+        android:visibility="gone">
+        </ListView>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/frameempty">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_music"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/splash_title"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+    </FrameLayout>
+
 </LinearLayout>

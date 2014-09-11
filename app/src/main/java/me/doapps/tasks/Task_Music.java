@@ -29,7 +29,8 @@ import me.doapps.beans.Music_DTO;
 public class Task_Music {
     private Context context;
     private Interface_Music interface_music;
-    private static final String WS_ALL_MUSIC = "http://api.mp3yox.com/tracks/audio.php";
+
+    private static final String WS_ALL_MUSIC = "http://api.mp3yox.com/tracks/audio.php?q=@";
 
     public Task_Music(Context context){
         this.context = context;
@@ -39,26 +40,30 @@ public class Task_Music {
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest jsonStringRequest = new StringRequest(
                 Request.Method.GET,
-                WS_ALL_MUSIC,
+                WS_ALL_MUSIC.replace("@",music_name),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             ArrayList<Music_DTO> music_dtos = new ArrayList<Music_DTO>();
                             JSONArray jsonArrayMusic = new JSONArray(response);
-                            Log.e("list music", jsonArrayMusic.toString());
                             if(jsonArrayMusic.length()>0){
                                 for (int i = 0; i < jsonArrayMusic.length() - 1; i++) {
                                     JSONObject jsonObject = jsonArrayMusic.getJSONObject(i);
                                     Music_DTO music_dto = new Music_DTO();
                                     music_dto.setName(jsonObject.getString("title").toString());
                                     music_dto.setUrl(jsonObject.getString("mp3_url"));
+                                    music_dto.setDuration(jsonObject.getString("duration"));
+                                    music_dto.setJsonObjectTrack(jsonObject);
                                     music_dtos.add(music_dto);
                                 }
-                                interface_music.getMusic(true, music_dtos);
+                                interface_music.getMusic(true,music_dtos);
+                            }else{
+                                interface_music.getMusic(false,null);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            interface_music.getMusic(false,null);
                         }
                     }
                 },
@@ -68,14 +73,7 @@ public class Task_Music {
                         Toast.makeText(context, "Ocurrio un error de Conexion", Toast.LENGTH_SHORT).show();
                     }
                 }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("q",music_name);
-                return params;
-            }
-        };
+        );
         queue.add(jsonStringRequest);
     }
 

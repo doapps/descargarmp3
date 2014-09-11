@@ -4,7 +4,7 @@
     <item android:state_pressed="true"><shape android:shape="rectangle">
         <corners android:radius="10dp" />
 
-            <stroke android:width="2dp" android:color="@color/nomad_blue" />
+            <stroke android:width="2dp" android:color="@color/plomo_oscuro_asbestos" />
 
             <solid android:color="@color/color_blanco" />
         </shape></item>
@@ -12,7 +12,7 @@
     <item android:state_focused="true"><shape android:shape="rectangle">
             <corners android:radius="10dp" />
 
-            <stroke android:width="2dp" android:color="@color/plomo_claro_clouds" />
+            <stroke android:width="2dp" android:color="@color/plomo_oscuro_asbestos" />
 
             <solid android:color="@color/color_blanco" />
         </shape></item>
