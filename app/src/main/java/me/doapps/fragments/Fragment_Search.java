@@ -122,10 +122,9 @@ public class Fragment_Search extends Fragment {
     AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Music_DTO music_dto = (Music_DTO) parent.getItemAtPosition(position);
+            getActivity().getIntent().putExtra("music_dto",music_dto);
             ((Main)getActivity()).mPager.setCurrentItem(2);
-            String temp = "";
-            //((Main)getActivity()).getSupportFragmentManager().beginTransaction().add(getActivity(), Fragment_Player.newInstance(temp)).addToBackStack("detalle_producto").commit();
-
         }
     };
 }

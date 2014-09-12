@@ -2,10 +2,12 @@ package me.doapps.beans;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by jnolascob on 10/09/2014.
  */
-public class Music_DTO {
+public class Music_DTO implements Serializable {
 
 
     private String name;

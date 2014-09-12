@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:gravity="center"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -16,10 +16,12 @@
         android:text="@string/name_music" />
 
     <ImageView
-        android:padding="20dp"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_player" />
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/logo_player"
+        android:layout_gravity="center" />
 
     <TextView
         android:layout_width="match_parent"
@@ -33,25 +35,65 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
         android:layout_gravity="center_horizontal" />
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:background="#D9000000">
 
-        <ImageButton
-            android:id="@+id/btn_play"
+        <ProgressBar
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/progressBar2"
+            android:layout_weight="1"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Title"
+            android:id="@+id/nombremusica"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:textColor="@color/color_blanco"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Pause"
+            android:id="@+id/pause"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/play"
-            android:text="@string/play" />
+            android:visibility="gone"></Button>
 
-        <Button
+        <ImageView
+            android:text="Play"
+            android:id="@+id/play"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@android:drawable/ic_media_play"
+            android:layout_width="50dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:layout_height="50dp" />
+
+        <ImageButton
+            android:text="Stop"
+            android:id="@+id/stop"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/download"
+            android:visibility="gone"
             android:layout_weight="1" />
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>

@@ -63,5 +63,4 @@ public class Fragment_Adapter extends FragmentPagerAdapter implements IconPagerA
         }
         return title;
     }
-
 }
